@@ -7,8 +7,8 @@ const Home: NextPage = () => {
   const [height, setHeight] = React.useState<number | null>(null);
   const [width, setWidth] = React.useState<number | null>(null);
 
-  const handleFileChange = () => {
-    return;
+  const updateImage = (event: any) => {
+    setImage(event.target.files[0]);
   };
 
   const updateValue = (
@@ -28,7 +28,8 @@ const Home: NextPage = () => {
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
         <div className="container flex flex-col items-center justify-center gap-12 bg-black px-4 py-16">
-          <input type="file" onChange={handleFileChange} />
+          <input type="file" onChange={updateImage} />
+          <span className="text-white">{image?.name}</span>
           <input type="text" onChange={(event) => updateValue(true, event)} />
           <input type="text" onChange={(event) => updateValue(false, event)} />
           <button className="bg-white" type="button">
