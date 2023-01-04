@@ -1,18 +1,22 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
+import React from "react";
 
 const Home: NextPage = () => {
+  const [image, setImage] = React.useState(null);
+  const [height, setHeight] = React.useState<number | null>(null);
+  const [width, setWidth] = React.useState<number | null>(null);
+
   const handleFileChange = () => {
     return;
   };
 
-  const handleHeightChange = () => {
-    return;
-  };
-
-  const handleWidthChange = () => {
-    return;
+  const updateValue = (
+    value: boolean,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const input = event.target.value.replace(/\D/g, "");
+    return value ? setHeight(+input) : setWidth(+input);
   };
 
   return (
@@ -23,11 +27,13 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
-        <div className="container flex flex-col items-center justify-center gap-12 bg-white px-4 py-16">
+        <div className="container flex flex-col items-center justify-center gap-12 bg-black px-4 py-16">
           <input type="file" onChange={handleFileChange} />
-          <input type="text" onChange={handleHeightChange} />
-          <input type="text" onChange={handleWidthChange} />
-          <button type="button">Transformar</button>
+          <input type="text" onChange={(event) => updateValue(true, event)} />
+          <input type="text" onChange={(event) => updateValue(false, event)} />
+          <button className="bg-white" type="button">
+            Transformar
+          </button>
         </div>
       </main>
     </>
