@@ -2,7 +2,10 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import React from "react";
 
+import { api } from "../utils/api";
+
 const Home: NextPage = () => {
+  const hello = api.example.hello.useQuery({ text: "from tRPC" });
   const [image, setImage] = React.useState(null);
   const [height, setHeight] = React.useState<number | null>(null);
   const [width, setWidth] = React.useState<number | null>(null);
@@ -29,7 +32,7 @@ const Home: NextPage = () => {
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
         <div className="container flex flex-col items-center justify-center gap-12 bg-black px-4 py-16">
           <input type="file" onChange={updateImage} />
-          <span className="text-white">{image?.name}</span>
+          <span className="text-white">{(image as any)?.name}</span>
           <input type="text" onChange={(event) => updateValue(true, event)} />
           <input type="text" onChange={(event) => updateValue(false, event)} />
           <button className="bg-white" type="button">
